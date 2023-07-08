@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.iweb.mapper.UserMapper">
+
+
+    <select id="login" resultType="int">
+        SELECT count(1) from users where username=#{username} and password=#{password}
+
+    </select>
+
+    <update id="updateWhenFail" parameterType="map">
+        update users set failcount=failcount+1 where username=#{username}
+
+    </update>
+</mapper>

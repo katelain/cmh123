@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.iweb.mapper.UserInfoMapper">
+
+<select id="showAll" resultType="java.util.Map">
+    select * from userinfo
+    </select>
+
+<insert id="addUserInfo" parameterType="map">
+    insert into userInfo values(#{userId},#{userName},#{sex},#{education},#{age},#{salary},#{tax},#{nativeProvince},#{nativeCity},#{writerId},)
+    </insert>
+
+<delete id="delUserInfoMany" parameterType="string" >
+    delete from userInfo
+    WHERE userid IN
+    <foreach item="userid" collection="ids" open="(" separator="," close=")">
+        #{id}
+    </foreach>
+    </delete>
+
+
+
+<update id="updateUserInfo" parameterType="map">
+    update userinfo
+    <set>
+        <if test="username != null">
+            username=#{username},
+        </if>
+        <if test="password != null">
+            password=#{password},
+        </if>
+        <if test="sex != null">
+            sex=#{sex},
+        </if>
+        <if test="education != null">
+            education=#{education},
+        </if>
+        <if test="age != null">
+            age=#{age},
+        </if>
+        <if test="salary != null">
+            salary=#{salary},
+        </if>
+        <if test="tax != null">
+            tax=#{tax},
+        </if>
+        <if test="nativeProvince != null">
+            nativeProvince=#{nativeProvince},
+        </if>
+        <if test="nativeCity != null">
+        nativeCity=#{nativeCity},
+        </if>
+        <if test="writerId != null">
+            writerId=#{writerId},
+        </if>
+    </set>
+    where userId=#{userId}
+</update>
+
+</mapper>
